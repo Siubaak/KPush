@@ -12,9 +12,8 @@ module.exports = {
   },
   async push (ctx) {
     const path = await model.path(ctx.query)
-    if (mail(path))
-
-    ctx.body = 'application/json'
+    const err = mail(path)
+    if (err) {return ctx.body = err}
     ctx.body = path
   }
 }

@@ -1,18 +1,20 @@
 const nodemailer = require('nodemailer')
 
 const transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-        user: 'bsspirit@gmail.com',
-        pass: 'xxxxx'
-    }
+  host : 'smtp.163.com',
+  secureConnection: true,
+  port: 465,
+  auth : {
+      user : 'test',
+      pass : 'test'
+  }
 })
 
 module.exports = path => {
   transporter.sendMail({
-    from: 'noreply@163.com',
-    to: 'a416142313@kindle.cn',
+    from: 'test',
+    to: 'test',
     subject: 'mobi',
     attachments: [{ path }]
-  }, (err, info) => { return err })
+  }, (err, info) => { console.log(info); return err })
 }
