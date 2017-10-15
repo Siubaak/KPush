@@ -1,0 +1,30 @@
+{
+  "name": "kpush",
+  "version": "0.1.0",
+  "description": "A push server for kindle based on www.zoudupai.com",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Siubaak/KPush.git"
+  },
+  "keywords": [
+    "kindle",
+    "mobi"
+  ],
+  "author": "Siubaak",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Siubaak/KPush/issues"
+  },
+  "homepage": "https://github.com/Siubaak/KPush#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "koa": "^2.3.0",
+    "koa-router": "^7.2.1",
+    "nodemailer": "^4.2.0",
+    "superagent": "^3.6.3"
+  }
+}
