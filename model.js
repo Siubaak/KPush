@@ -13,8 +13,8 @@ module.exports = {
     for(let i = 0; i < notes.length; i++) {
       list.push({
         href: 'http://www.zoudupai.com/note/' + notes[i].attribs.dataid,
-        image: 'http://www.zoudupai.com' + pics[i].attribs.src,
-        content: ctxs[i].children[0].data
+        img: 'http://www.zoudupai.com' + pics[i].attribs.src,
+        ctx: ctxs[i].children[0].data
       })
     }
     return list
@@ -23,7 +23,8 @@ module.exports = {
     const res = await request.get('http://www.zoudupai.com/note/' + i)
     const $ = cheerio.load(res.text)
     const href = 'http://www.zoudupai.com' + $('.shw_body').children()[5].attribs.onclick.split("'")[1]
-    request.get(href).pipe(fs.createWriteStream('mobi/' + i + '.mobi'))
+    const mobi = await request.get(href)
+    fs.writeFileSync('mobi/' + i + '.mobi', mobi)
     return 'mobi/' + i + '.mobi'
   }
 }

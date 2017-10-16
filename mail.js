@@ -11,10 +11,15 @@ const transporter = nodemailer.createTransport({
 })
 
 module.exports = path => {
-  transporter.sendMail({
-    from: 'test',
-    to: 'test',
-    subject: 'mobi',
-    attachments: [{ path }]
-  }, (err, info) => { console.log(info); return err })
+  return new Promise(resolve => {
+    transporter.sendMail({
+      from: 'test',
+      to: 'test',
+      subject: 'mobi',
+      attachments: [{ path }]
+    }, (err, info) => {
+      resolve(err)
+    })
+  })
+  
 }

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>KPush服务</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0px;
+      background: #f3f3f3;
+    }
+    .nav {
+      width: 100%;
+      height: 50px;
+      padding: 8px;
+      display: flex;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid rgba(30,35,42,.06);
+      -webkit-box-shadow: 0 1px 3px 0 rgba(0,34,77,.05);
+      box-shadow: 0 1px 3px 0 rgba(0,34,77,.05);
+      background-clip: content-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      position: fixed;
+      background: #fff;
+    }
+    .container {
+      padding-top: 50px;
+      display: flex;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .card {
+      flex: 1;
+      -ms-flex: 1;
+      -webkit-flex: 1;
+      padding: 12px;
+      width: 95%;
+      margin-top: 10px;
+      background: #fff;
+      overflow: hidden;
+      border-radius: 3px;
+      -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.1);
+      box-shadow: 0 1px 3px rgba(0,0,0,.1);
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      display: flex;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      align-items: flex-start;
+    }
+    .card p {
+      margin: 0;
+      flex: 1;
+      -ms-flex: 1;
+      -webkit-flex: 1;
+    }
+    .card div {
+      width: 100px;
+    }
+    .card img {
+      width: 100px;
+      border-radius: 3px;
+    }
+    .card button {
+      margin-top: 8px;
+      width: 100px;
+      float: right;
+    }
+    h2 {
+      margin-top: 0;
+      color: #0d79d1;
+    }
+    .input {
+      background: #f7f8fa;
+      flex: 1;
+      -ms-flex: 1;
+      -webkit-flex: 1;
+      height: 34px;
+      padding: 4px 10px;
+      font-size: 14px;
+      border: 1px solid #e7eaf1;
+      border-radius: 3px;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    input {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      overflow: hidden;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      background: transparent;
+      border: none;
+      outline: none;
+      resize: none;
+    }
+    button {
+      height: 34px;
+      width: 68px;
+      margin-left: 8px;
+      padding: 4px 10px;
+      font-size: 14px;
+      border: 1px solid #0f88eb;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 3px;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      background: #0f88eb;
+      color: #fff;
+    }
+    button:hover {
+      background: #0d79d1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+      <div class="input">
+          <input placeholder="请输入书名"></input>
+      </div>
+      <button onclick="window.location.href = 's?q=' + document.getElementsByTagName('input')[0].value ">搜索</button>  
+  </div>
+  <div class="container">
+    <% if (list.length) { %>
+    <% list.forEach(function(book) { %>  
+    <div class="card">
+      <p><%= book.ctx %></p>
+      <div>
+          <img src="<%= book.img %>"></img>
+          <button onclick="window.location.href = <%= book.href %>">推送</button>
+      </div>
+    </div>
+    <% }) %>
+    <% } %>
+  </div>
+</body>
+
+</html>
