@@ -12,7 +12,7 @@ module.exports = {
     let list = []
     for(let i = 0; i < notes.length; i++) {
       list.push({
-        href: 'http://www.zoudupai.com/note/' + notes[i].attribs.dataid,
+        id: notes[i].attribs.dataid,
         img: 'http://www.zoudupai.com' + pics[i].attribs.src,
         ctx: ctxs[i].children[0].data
       })
@@ -23,8 +23,12 @@ module.exports = {
     const res = await request.get('http://www.zoudupai.com/note/' + i)
     const $ = cheerio.load(res.text)
     const href = 'http://www.zoudupai.com' + $('.shw_body').children()[5].attribs.onclick.split("'")[1]
-    const mobi = await request.get(href)
-    fs.writeFileSync('mobi/' + i + '.mobi', mobi)
-    return 'mobi/' + i + '.mobi'
+    const filename = i + '_' + Date.now()
+    await new Promise((resolve, reject) => {
+      const download = new request.get(href).pipe(fs.createWriteStream('mobi/' + filename + '.mobi'))
+      download.on('close', () => { resolve() })
+      download.on('error', err => { reject(err) })
+    })
+    return 'mobi/' + filename + '.mobi'
   }
 }

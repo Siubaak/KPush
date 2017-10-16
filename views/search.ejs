@@ -31,6 +31,7 @@
     }
     .container {
       padding-top: 50px;
+      padding-bottom: 10px;
       display: flex;
       display: -ms-flexbox;
       display: -webkit-flex;
@@ -64,6 +65,7 @@
       -webkit-flex: 1;
     }
     .card div {
+      margin-left: 12px;
       width: 100px;
     }
     .card img {
@@ -129,7 +131,7 @@
 <body>
   <div class="nav">
       <div class="input">
-          <input placeholder="请输入书名"></input>
+          <input placeholder="请输入书名" value="<%= query %>"></input>
       </div>
       <button onclick="window.location.href = 's?q=' + document.getElementsByTagName('input')[0].value ">搜索</button>  
   </div>
@@ -140,10 +142,13 @@
       <p><%= book.ctx %></p>
       <div>
           <img src="<%= book.img %>"></img>
-          <button onclick="window.location.href = <%= book.href %>">推送</button>
+          <button onclick="window.location.href = 'p?i=' + <%= book.id %>">推送</button>
       </div>
     </div>
     <% }) %>
+    
+    <% } else { %>
+    <p style="color: #8590a6">哎呀，没有相关图书哦...</p>
     <% } %>
   </div>
 </body>

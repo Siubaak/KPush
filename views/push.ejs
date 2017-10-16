@@ -23,30 +23,6 @@
       margin-top: 0;
       color: #0d79d1;
     }
-    .input {
-      background: #f7f8fa;
-      height: 34px;
-      width: 70%;
-      padding: 4px 10px;
-      font-size: 14px;
-      border: 1px solid #e7eaf1;
-      border-radius: 3px;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-    }
-    input {
-      height: 100%;
-      width: 100%;
-      padding: 0;
-      overflow: hidden;
-      font-family: inherit;
-      font-size: inherit;
-      font-weight: inherit;
-      background: transparent;
-      border: none;
-      outline: none;
-      resize: none;
-    }
     button {
       background: #f7f8fa;
       height: 34px;
@@ -57,7 +33,6 @@
       text-align: center;
       cursor: pointer;
       border-radius: 3px;
-      -webkit-box-sizing: border-box;
       box-sizing: border-box;
       background: #0f88eb;
       margin-top: 8px;
@@ -71,11 +46,12 @@
 
 <body>
   <div class="container">
-    <h2>KPush服务</h2>
-    <div class="input">
-        <input placeholder="请输入书名..."></input>
-    </div>
-    <button onclick="window.location.href = 's?q=' + document.getElementsByTagName('input')[0].value ">搜索</button>
+    <% if (err) { %>
+    <h2 style="color: #eb550f;">推送失败，再试一次吧</h2>
+    <% } else { %>
+    <h2>推送成功</h2>
+    <% } %>
+    <button onclick="window.history.back()">返回</button>
   </div>
 </body>
 

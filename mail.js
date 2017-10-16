@@ -1,25 +1,23 @@
 const nodemailer = require('nodemailer')
+const config = require('./config')
 
 const transporter = nodemailer.createTransport({
-  host : 'smtp.163.com',
+  host : config.smtp,
   secureConnection: true,
   port: 465,
   auth : {
-      user : 'test',
-      pass : 'test'
+      user : config.mail,
+      pass : config.password
   }
 })
 
 module.exports = path => {
   return new Promise(resolve => {
     transporter.sendMail({
-      from: 'test',
-      to: 'test',
+      from: config.mail,
+      to: config.kindle,
       subject: 'mobi',
       attachments: [{ path }]
-    }, (err, info) => {
-      resolve(err)
-    })
+    }, (err, info) => resolve(err))
   })
-  
 }
