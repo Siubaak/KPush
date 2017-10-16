@@ -14,10 +14,15 @@ const transporter = nodemailer.createTransport({
 module.exports = path => {
   return new Promise(resolve => {
     transporter.sendMail({
-      from: config.mail,
+      from: 'noreply  <' + config.mail + '>',
       to: config.kindle,
-      subject: 'mobi',
-      attachments: [{ path }]
+      subject: 'Convert',
+      text: 'Pushing to kindle from ' + path,
+      attachments: [{ 
+        path,
+        encoding: 'base64',
+        contentType: 'application/x-mobipocket-ebook'
+      }]
     }, (err, info) => resolve(err))
   })
 }

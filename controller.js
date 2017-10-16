@@ -23,8 +23,8 @@ module.exports = {
     ctx.body = ejs.render(searchView, { query: ctx.query.q, list })
   },
   async push (ctx) {
-    const path = await model.path(ctx.query)
-    const err = await mail(path)
+    const url = await model.path(ctx.query)
+    const err = await mail(url)
     ctx.body = ejs.render(pushView, { err })
   }
 }

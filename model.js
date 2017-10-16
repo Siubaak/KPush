@@ -22,13 +22,6 @@ module.exports = {
   async path ({ i }) {
     const res = await request.get('http://www.zoudupai.com/note/' + i)
     const $ = cheerio.load(res.text)
-    const href = 'http://www.zoudupai.com' + $('.shw_body').children()[5].attribs.onclick.split("'")[1]
-    const filename = i + '_' + Date.now()
-    await new Promise((resolve, reject) => {
-      const download = new request.get(href).pipe(fs.createWriteStream('mobi/' + filename + '.mobi'))
-      download.on('close', () => { resolve() })
-      download.on('error', err => { reject(err) })
-    })
-    return 'mobi/' + filename + '.mobi'
+    return 'http://www.zoudupai.com' + $('.shw_body').children()[5].attribs.onclick.split("'")[1]
   }
 }
