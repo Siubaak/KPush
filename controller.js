@@ -2,10 +2,10 @@ const fs = require('fs')
 const ejs = require('ejs')
 const model = require('./model')
 const push = require('./push')
-const errorView = fs.readFileSync('views/error.html')
-const homeView = fs.readFileSync('views/home.html')
-const pushView = fs.readFileSync('views/push.ejs', { encoding: 'utf-8' })
-const searchView = fs.readFileSync('views/search.ejs', { encoding: 'utf-8' })
+const errorView = fs.readFileSync(__dirname + '/views/error.html')
+const homeView = fs.readFileSync(__dirname + '/views/home.html')
+const pushView = fs.readFileSync(__dirname + '/views/push.ejs', { encoding: 'utf-8' })
+const searchView = fs.readFileSync(__dirname + '/views/search.ejs', { encoding: 'utf-8' })
 
 module.exports = {
   async error (ctx, next) {
