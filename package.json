@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "kpush": "./cli.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Siubaak/KPush.git"
@@ -22,6 +25,7 @@
   "homepage": "https://github.com/Siubaak/KPush#readme",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
+    "commander": "^2.11.0",
     "ejs": "^2.5.7",
     "koa": "^2.3.0",
     "koa-router": "^7.2.1",

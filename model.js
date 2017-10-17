@@ -1,8 +1,18 @@
-const fs = require('fs')
 const request = require('superagent')
 const cheerio = require('cheerio')
 
 module.exports = {
+  /**
+   * 获取mobi电子书搜索列表
+   * 
+   * @param {string} q - 查询关键词
+   * @return {array} - 返回list数组
+   * 
+   * list数组元素为mobi对象，包含3个字段，均为string
+   * mobi.id - mobi电子书唯一索引，用于查询源下载用url
+   * mobi.img - mobi电子书封面图url
+   * mobi.ctx - mobi电子书简介
+   */
   async getList (q) {
     const res = await request.get('http://www.zoudupai.com/book/share').query({ kw: q })
     const $ = cheerio.load(res.text)

@@ -1,6 +1,1 @@
-{
-  "smtp": "smtp.163.com",
-  "mail": "test@163.com",
-  "password": "test",
-  "kindle": "test@kindle.cn"
-}
+{"port":"7001","smtp":"smtp.163.com","user":"test@163.com","pass":"test","kindle":"test@kindle.cn"}
