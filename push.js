@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 module.exports = path => {
   return new Promise(resolve => {
     transporter.sendMail({
-      from: 'noreply  <' + config.mail + '>',
+      from: 'noreply  <' + config.user + '>',
       to: config.kindle,
       subject: 'Convert',
       text: 'Pushing to kindle from ' + path,

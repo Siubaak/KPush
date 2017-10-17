@@ -26,6 +26,7 @@ module.exports = {
   async push (ctx) {
     const url = await model.getUrl(ctx.query.i)
     const err = await push(url)
+    if (err) console.log(err)
     ctx.body = ejs.render(pushView, { err })
   }
 }

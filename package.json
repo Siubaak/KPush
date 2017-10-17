@@ -1,6 +1,6 @@
 {
   "name": "kpush",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A push server for kindle based on www.zoudupai.com",
   "main": "app.js",
   "scripts": {
