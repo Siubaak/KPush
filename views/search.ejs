@@ -11,6 +11,38 @@
       margin: 0px;
       background: #f3f3f3;
     }
+    .mask {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.5s;
+      background: #f3f3f3;
+      z-index: -100;
+    }
+    .msg {
+      width: 100%;
+      height: 100px;
+      padding: 8px;
+      display: flex;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      justify-content: space-around;
+      align-items: center;
+      border-top: 1px solid rgba(30,35,42,.06);
+      -webkit-box-shadow: 0 -1px 3px 0 rgba(0,34,77,.05);
+      box-shadow: 0 -1px 3px 0 rgba(0,34,77,.05);
+      background-clip: content-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      position: fixed;
+      bottom: -100px;
+      transition: bottom 0.5s;
+      background: #fff;
+      z-index: 100;
+    }
     .nav {
       width: 100%;
       height: 50px;
@@ -28,6 +60,32 @@
       box-sizing: border-box;
       position: fixed;
       background: #fff;
+    }
+    .nav .input {
+      background: #f7f8fa;
+      flex: 1;
+      -ms-flex: 1;
+      -webkit-flex: 1;
+      height: 34px;
+      padding: 4px 10px;
+      font-size: 14px;
+      border: 1px solid #e7eaf1;
+      border-radius: 3px;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    .nav input {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      overflow: hidden;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      background: transparent;
+      border: none;
+      outline: none;
+      resize: none;
     }
     .container {
       padding-top: 50px;
@@ -81,32 +139,6 @@
       margin-top: 0;
       color: #0d79d1;
     }
-    .input {
-      background: #f7f8fa;
-      flex: 1;
-      -ms-flex: 1;
-      -webkit-flex: 1;
-      height: 34px;
-      padding: 4px 10px;
-      font-size: 14px;
-      border: 1px solid #e7eaf1;
-      border-radius: 3px;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-    }
-    input {
-      height: 100%;
-      width: 100%;
-      padding: 0;
-      overflow: hidden;
-      font-family: inherit;
-      font-size: inherit;
-      font-weight: inherit;
-      background: transparent;
-      border: none;
-      outline: none;
-      resize: none;
-    }
     button {
       height: 34px;
       width: 68px;
@@ -129,11 +161,16 @@
 </head>
 
 <body>
+  <div class="msg">
+    <p>确定推送？没点错吧？</p>
+    <button onclick="push()">确定</button>
+  </div>
+  <div class="mask" onclick="hide()"></div>
   <div class="nav">
-      <div class="input">
-          <input placeholder="请输入书名" value="<%= query %>"></input>
-      </div>
-      <button onclick="window.location.href = 's?q=' + document.getElementsByTagName('input')[0].value ">搜索</button>  
+    <div class="input">
+      <input placeholder="请输入书名..." value="<%= query %>"></input>
+    </div>
+    <button onclick="window.location.href = 's?q=' + document.getElementsByTagName('input')[0].value ">搜索</button>  
   </div>
   <div class="container">
     <% if (list.length) { %>
@@ -142,15 +179,40 @@
       <p><%= book.ctx %></p>
       <div>
           <img src="<%= book.img %>"></img>
-          <button onclick="window.location.href = 'p?i=' + <%= book.id %>">推送</button>
+          <button onclick="show(<%= book.id %>)">推送</button>
       </div>
     </div>
     <% }) %>
-    
     <% } else { %>
     <p style="color: #8590a6">哎呀，没有相关图书哦...</p>
     <% } %>
   </div>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    const msg = $('.msg').first()
+    const mask = $('.mask').first()
+    let curId
+    function show(id) {
+      curId = id
+      $('.msg').css({ bottom: 0 })
+      $('.mask').css({ zIndex: 1, opacity: 0.9 })
+      $('html, body').css({ overflow: 'hidden' })
+    }
+    function hide() {
+      $('.msg').css({ bottom: '-100px' })
+      $('.mask').css({ zIndex: -100, opacity: 0 })
+      $('html, body').css({ overflow: 'auto' })
+    }
+    function push() {
+      $('.mask').removeAttr('onclick')
+      $('.msg button').remove()
+      $('.msg p').text('推送中，需要一段时间哦...')
+      $('.msg p').css({ color: '#8590a6' })
+      $('.msg p').fadeOut(500).fadeIn(500)
+      setInterval(function() { $('.msg p').fadeOut(500).fadeIn(500) }, 1000)
+      window.location.href = 'p?i=' + curId
+    }
+  </script>
 </body>
 
 </html>

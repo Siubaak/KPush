@@ -3,7 +3,7 @@ const request = require('superagent')
 const cheerio = require('cheerio')
 
 module.exports = {
-  async list ({ q }) {
+  async getList (q) {
     const res = await request.get('http://www.zoudupai.com/book/share').query({ kw: q })
     const $ = cheerio.load(res.text)
     const notes = $('#searchresultlist').find('.imBoard')
@@ -19,7 +19,7 @@ module.exports = {
     }
     return list
   },
-  async path ({ i }) {
+  async getUrl (i) {
     const res = await request.get('http://www.zoudupai.com/note/' + i)
     const $ = cheerio.load(res.text)
     return 'http://www.zoudupai.com' + $('.shw_body').children()[5].attribs.onclick.split("'")[1]
