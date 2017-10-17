@@ -29,6 +29,12 @@ module.exports = {
     }
     return list
   },
+  /**
+    * 获取mobi电子书下载链接
+    * 
+    * @param {string} i - mobi电子书索引
+    * @return {string} - 返回源中mobi电子书下载链接
+    */
   async getUrl (i) {
     const res = await request.get('http://www.zoudupai.com/note/' + i)
     const $ = cheerio.load(res.text)

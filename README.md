@@ -46,14 +46,14 @@ $ kpush
 
 ```bash
 # 可以只设置其中几项
-$ sslocal -p 7001 -s smtp.163.com -u test@163.com -s test -k test@kindle.cn
+$ kpush -p 7001 -s smtp.163.com -u test@163.com -s test -k test@kindle.cn
 ```
 
 以自定义配置运行：
 
 ```bash
 # 请提供配置的绝对路径，以自定义配置运行时将忽略其他设置选项
-$ sslocal -c /usr/local/ss-n/lib/local/config.json
+$ kpush -c /usr/local/kpush/config.json
 ```
 
 配置格式如下，字段含义见帮助：
