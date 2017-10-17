@@ -10,7 +10,7 @@ program.version(package.version)
   .option('-p, --port <number>', 'set kpush server listening port')
   .option('-s, --smtp <string>', 'set stmp server of pushing mail')
   .option('-u, --user <string>', 'set user of pushing mail')
-  .option('-s, --pass <string>', 'set password of pushing mail')
+  .option('-w, --pass <string>', 'set password of pushing mail')
   .option('-k, --kindle <string>', 'set user of kindle received mail')
   .parse(process.argv)
 

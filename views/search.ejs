@@ -196,12 +196,10 @@
       curId = id
       $('.msg').css({ bottom: 0 })
       $('.mask').css({ zIndex: 1, opacity: 0.9 })
-      $('html, body').css({ overflow: 'hidden' })
     }
     function hide() {
       $('.msg').css({ bottom: '-100px' })
       $('.mask').css({ zIndex: -100, opacity: 0 })
-      $('html, body').css({ overflow: 'auto' })
     }
     function push() {
       $('.mask').removeAttr('onclick')
