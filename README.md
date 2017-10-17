@@ -6,7 +6,7 @@
 
 ## 安装
 
-首选需要安装Node.js环境，且版本大于8，[相关信息请戳这里](https://nodejs.org/en/download/current/)
+首先需要安装Node.js环境，且版本大于8，[相关信息请戳这里](https://nodejs.org/en/download/current/)
 
 ### npm源
 
