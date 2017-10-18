@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
 })
 
 module.exports = path => {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     transporter.sendMail({
       from: 'noreply  <' + config.user + '>',
       to: config.kindle,
@@ -23,6 +23,9 @@ module.exports = path => {
         encoding: 'base64',
         contentType: 'application/x-mobipocket-ebook'
       }]
-    }, (err, info) => resolve(err))
+    }, (err, info) => {
+      if (err) reject(err)
+      else resolve()
+    })
   })
 }
