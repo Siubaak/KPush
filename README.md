@@ -29,7 +29,7 @@ Options:
   -p, --port <number>    set kpush server listening port
   -s, --smtp <string>    set stmp server of pushing mail
   -u, --user <string>    set user of pushing mail
-  -s, --pass <string>    set password of pushing mail
+  -w, --pass <string>    set password of pushing mail
   -k, --kindle <string>  set user of kindle received mail
   -h, --help             output usage information
 ```
@@ -46,7 +46,7 @@ $ kpush
 
 ```bash
 # 可以只设置其中几项
-$ kpush -p 7001 -s smtp.163.com -u test@163.com -s test -k test@kindle.cn
+$ kpush -p 7001 -s smtp.163.com -u test@163.com -w test -k test@kindle.cn
 ```
 
 以自定义配置运行：
