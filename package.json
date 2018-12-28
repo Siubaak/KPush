@@ -1,35 +1,61 @@
 {
-  "name": "kpush",
-  "version": "1.0.4",
-  "description": "A push server for kindle based on www.zoudupai.com",
-  "main": "app.js",
+  "name": "kp",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "vue-cli-service serve",
+    "build": "npm run build:server && npm run rename && npm run build:client && npm run rename:back && npm run remove",
+    "build:client": "vue-cli-service build",
+    "build:server": "cross-env WEBPACK_TARGET=node vue-cli-service build",
+    "rename": "mv dist/vue-ssr-server-bundle.json tmp-bundle",
+    "rename:back": "mv tmp-bundle dist/vue-ssr-server-bundle.json",
+    "remove": "rm dist/index.html",
+    "lint": "vue-cli-service lint"
   },
-  "bin": {
-    "kpush": "./cli.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Siubaak/KPush.git"
-  },
-  "keywords": [
-    "kindle",
-    "mobi"
-  ],
-  "author": "Siubaak",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Siubaak/KPush/issues"
-  },
-  "homepage": "https://github.com/Siubaak/KPush#readme",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "commander": "^2.11.0",
-    "ejs": "^2.5.7",
-    "koa": "^2.3.0",
-    "koa-router": "^7.2.1",
-    "nodemailer": "^4.2.0",
-    "superagent": "^3.6.3"
-  }
+    "commander": "^2.19.0",
+    "koa": "^2.6.2",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "superagent": "^4.1.0",
+    "vue": "^2.5.17",
+    "vue-router": "^3.0.2",
+    "vue-server-renderer": "^2.5.21"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.4",
+    "@vue/cli-plugin-eslint": "^3.0.4",
+    "@vue/cli-service": "^3.0.4",
+    "babel-eslint": "^10.0.1",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0-0",
+    "vue-template-compiler": "^2.5.17",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }

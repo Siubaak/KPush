@@ -6,8 +6,8 @@ const transporter = nodemailer.createTransport({
   secureConnection: true,
   port: 465,
   auth : {
-      user : config.user,
-      pass : config.pass
+    user : config.user,
+    pass : config.pass
   }
 })
 
@@ -23,9 +23,6 @@ module.exports = path => {
         encoding: 'base64',
         contentType: 'application/x-mobipocket-ebook'
       }]
-    }, (err, info) => {
-      if (err) reject(err)
-      else resolve()
-    })
+    }, err => err ? reject(err) : resolve())
   })
 }
