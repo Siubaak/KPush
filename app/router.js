@@ -7,10 +7,9 @@ const searchCrtller = require('./controllers/search')
 router.use(logMiddle)
 router.use(errorMiddle)
 
+router.get('/', homeCrtller.get)
 router.get('/search', searchCrtller.get)
 
 router.get('/api/push', searchCrtller.push)
-
-router.get('*', homeCrtller.get)
 
 module.exports = router.routes()

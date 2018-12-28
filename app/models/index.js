@@ -11,7 +11,7 @@ module.exports = {
    * list数组元素为mobi对象，包含3个字段，均为string
    * mobi.id - mobi电子书唯一索引，用于查询源下载用url
    * mobi.img - mobi电子书封面图url
-   * mobi.ctx - mobi电子书简介
+   * mobi.desc - mobi电子书描述（标题、简介等）
    */
   async getList(query) {
     const res = await request.get('http://www.pdfbook.cn').query({ s: query })
@@ -24,7 +24,7 @@ module.exports = {
       list.push({
         id: $as[i].attribs.href,
         img: $imgs[i].attribs.src,
-        ctx: $as[i].attribs.title
+        desc: $as[i].attribs.title
       })
     }
     return list

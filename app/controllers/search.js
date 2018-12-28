@@ -1,11 +1,10 @@
+const model = require('../models')
 const render = require('../services/render')
 
 module.exports = {
   async get(ctx) {
-    const html = await render({
-      title: 'KPush - 搜索结果',
-      query: '三体'
-    })
+    const list = await model.getList(ctx.query.query)
+    const html = await render({ title: 'KPush - 搜索结果' })
     ctx.body = html
   },
   async push(ctx) {

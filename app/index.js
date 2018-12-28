@@ -12,6 +12,6 @@ app.use(router)
 if (module.parent) {
   module.exports = app
 } else {
-  const config = require('./config')
+  const config = require('../config')
   app.listen(config.port)
 }

@@ -1,7 +1,11 @@
 {
-  "name": "kp",
-  "version": "0.1.0",
-  "private": true,
+  "name": "kpush",
+  "version": "2.0.0",
+  "description": "A push server for kindle based on www.zoudupai.com",
+  "main": "app/index.js",
+  "bin": {
+    "kpush": "./cli.js"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "npm run build:server && npm run rename && npm run build:client && npm run rename:back && npm run remove",
@@ -13,11 +17,14 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.2",
     "commander": "^2.19.0",
     "koa": "^2.6.2",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
     "superagent": "^4.1.0",
     "vue": "^2.5.17",
     "vue-router": "^3.0.2",
