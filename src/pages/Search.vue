@@ -6,11 +6,11 @@
     </div>
 
     <div v-if="list.length" class="kp-search-result">
-      <kp-card v-for="book in list" class="" :key="book.id" :img="book.img" :desc="book.desc" @push="handlePush"/>
+      <kp-card v-for="book in list" class="" :key="book.id" :img="book.img" :desc="book.desc" @push="handleFetchUrls"/>
     </div>
     <p v-else class="kp-search-no-result">哎呀，没有相关图书哦...</p>
 
-    <kp-dialog :visible="dialogVisible"></kp-dialog>
+    <kp-dialog :visible="dialogVisible" :urls="urls" @submit="handlePush"></kp-dialog>
     <kp-mask :visible="dialogVisible" @click="handleDialogHide"></kp-mask>
   </div>
 </template>
@@ -22,6 +22,8 @@ import Card from '../components/Card'
 import Dialog from '../components/Dialog'
 import Mask from '../components/Mask'
 
+import { getUrls, push } from '../api'
+
 export default {
   components: {
     'kp-input': Input,
@@ -30,23 +32,19 @@ export default {
     'kp-dialog': Dialog,
     'kp-mask': Mask
   },
+  asyncData ({ store, route }) {
+    return store.dispatch('getList', route.query.query)
+  },
+  computed: {
+    list () {
+      return this.$store.state.list
+    }
+  },
   data() {
     return {
       value: '',
-      dialogVisible: false,
-      list: [{
-        img: 'https://www.baidu.com/s?rsv_idx=1&wd=scala&ie=utf-8&rsv_cq=vue+router+push&rsv_dl=0_right_recommends_merge_28335&euri=1588150',
-        desc: 'scala',
-        id: 1
-      }, {
-        img: 'https://www.baidu.com/s?rsv_idx=1&wd=javascript&ie=utf-8&rsv_cq=vue+router+push&rsv_dl=0_right_recommends_merge_28335&euri=16168',
-        desc: 'javascript',
-        id: 2
-      }, {
-        img: 'https://www.baidu.com/s?rsv_idx=1&wd=github&ie=utf-8&rsv_cq=vue+router+push&rsv_dl=0_right_recommends_merge_28335&euri=3366456',
-        desc: 'github',
-        id: 3
-      }]
+      urls: [],
+      dialogVisible: false
     }
   },
   methods: {
@@ -58,9 +56,12 @@ export default {
         this.$router.push('search?query=' + this.value)
       }
     },
-    handlePush(id) {
+    handleFetchUrls(id) {
       this.dialogVisible = true
-      // this.$api.getLinkById(id).then(links => this.$dialog.show())
+      getUrls(id).then(urls => this.urls = urls)
+    },
+    handlePush(url) {
+      push(url).then(() => this.dialogVisible = false)
     }
   }
 }

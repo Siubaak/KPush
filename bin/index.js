@@ -32,4 +32,4 @@ fs.writeFileSync(path.join(__dirname, '../config.json'), JSON.stringify(config))
 
 const app = require('../app')
 
-app.listen(config.port, () => console.log('KPush server is listening at', config.port))
+app.listen(config.port, () => app.context.log.i(`KPush server is listening at ${config.port}`))

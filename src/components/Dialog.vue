@@ -1,7 +1,7 @@
 <template>
   <div class="kp-dialog" :style="dialogStyle">
-    <div v-if="links.length">
-      <kp-button v-for="link in links" :key="link.desc">{{link.desc}}</kp-button>
+    <div v-if="urls.length">
+      <kp-button v-for="(link, idx) in urls" :key="idx" @click="$emit('submit', link.url)">{{link.desc}}</kp-button>
     </div>
   </div>
 </template>
@@ -11,7 +11,7 @@ import Button from './Button'
 
 export default {
   props: {
-    links: {
+    urls: {
       type: Array,
       default: () => []
     },

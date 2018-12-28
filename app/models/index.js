@@ -33,9 +33,9 @@ module.exports = {
     * 获取mobi电子书下载链接
     * 
     * @param {string} id - mobi电子书索引
-    * @return {string} - 返回源中mobi电子书下载链接
+    * @return {array} - 返回源中mobi电子书下载链接数组
     */
-  async getUrl (id) {
+  async getUrls(id) {
     const res = await request.get(id)
     const $ = cheerio.load(res.text)
     return 'www.baidu.com'

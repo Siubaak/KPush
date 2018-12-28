@@ -1,5 +1,5 @@
-module.exports = async function error(ctx, next) {
-  console.log('start')
+module.exports = async function log(ctx, next) {
+  const start = Date.now()
   await next()
-  console.log('end')
+  ctx.log.i(`${ctx.request.method} ${ctx.url} ${Date.now() - start}ms`)
 }

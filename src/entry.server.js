@@ -2,7 +2,7 @@ import { createApp } from './main'
 
 export default ctx => {
   return new Promise((resolve, reject) => {
-    const { app, router } = createApp()
+    const { app, router, store } = createApp()
 
     router.push(ctx.url)
 
@@ -11,7 +11,18 @@ export default ctx => {
       if (!matchedComponents.length) {
         return reject({ code: 404 })
       }
-      resolve(app)
+      
+      Promise.all(matchedComponents.map(Component => {
+        if (Component.asyncData) {
+          return Component.asyncData({
+            store,
+            route: router.currentRoute
+          })
+        }
+      })).then(() => {
+        ctx.state = store.state
+        resolve(app)
+      }).catch(reject)
     }, reject)
   })
 }
