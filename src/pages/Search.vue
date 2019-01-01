@@ -6,11 +6,13 @@
     </div>
 
     <div v-if="list.length" class="kp-search-result">
-      <kp-card v-for="book in list" class="" :key="book.id" :img="book.img" :desc="book.desc" @push="handleFetchUrls"/>
+      <kp-card v-for="book in list" class="" :key="book.id" :img="book.img" :desc="book.desc" @push="handleFetchUrls(book.id)"/>
     </div>
-    <p v-else class="kp-search-no-result">哎呀，没有相关图书哦...</p>
+    <p v-else-if="fail" class="kp-search-tips">出错了，再搜一次吧...</p>
+    <p v-else class="kp-search-tips">哎呀，没有相关图书哦...</p>
 
-    <kp-dialog :visible="dialogVisible" :urls="urls" @submit="handlePush"></kp-dialog>
+    <kp-dialog :visible="dialogVisible" :urls="urls" @submit="handlePush"
+      @hide="handleDialogHide"></kp-dialog>
     <kp-mask :visible="dialogVisible" @click="handleDialogHide"></kp-mask>
   </div>
 </template>
@@ -36,12 +38,13 @@ export default {
     return store.dispatch('getList', route.query.query)
   },
   computed: {
-    list () {
+    list() {
       return this.$store.state.list
     }
   },
   data() {
     return {
+      fail: false,
       value: '',
       urls: [],
       dialogVisible: false
@@ -53,15 +56,29 @@ export default {
     },
     handleSearch() {
       if (this.value) {
-        this.$router.push('search?query=' + this.value)
+        this.fail = false
+        this.$store.dispatch('getList', this.value)
+          .then(res => {
+            if (res.status !== 200) {
+              this.fail = true
+            }
+          })
       }
     },
     handleFetchUrls(id) {
-      this.dialogVisible = true
-      getUrls(id).then(urls => this.urls = urls)
+      getUrls(id).then(res => {
+        this.urls = res.status === 200 ? res.data : []
+        this.dialogVisible = true
+      })
     },
     handlePush(url) {
-      push(url).then(() => this.dialogVisible = false)
+      push(url).then(res => {
+        if (res.status === 200) {
+          this.dialogVisible = false
+        } else {
+          this.urls = []
+        }
+      })
     }
   }
 }
@@ -101,7 +118,7 @@ export default {
     justify-content: center;
     align-items: center;
   }
-  .kp-search-no-result {
+  .kp-search-tips {
     color: #8590a6
   }
 }

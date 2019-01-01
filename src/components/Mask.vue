@@ -34,7 +34,6 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  transition: opacity 0.3s;
   background: #0f0f0f;
   position: fixed;
 }

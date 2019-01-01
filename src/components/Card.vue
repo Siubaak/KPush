@@ -37,22 +37,22 @@ export default {
   box-shadow: 0 1px 3px rgba(0,0,0,.1);
   box-sizing: border-box;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   .kp-card-img {
-    width: 60px;
-    border-radius: 5px;
+    width: 80px;
   }
   .kp-card-opr {
+    width: 100%;
     padding: 12px;
-    width: 100px;
+    display: flex;
+    align-items: center;
     .kp-card-desc {
       margin: 0;
       flex: 1;
+      text-align: left;
     }
     .kp-card-button {
-      margin-top: 8px;
-      width: 100px;
-      float: right;
+      margin-left: 8px;
     }
   }
 }

@@ -1,13 +1,29 @@
 import axios from 'axios'
+import progress from 'nprogress'
 
 export function getList(query) {
-  return axios.get('http://localhost:7001/api/search', { params: { query } })
+  progress.start()
+  return axios.get('/api/search', { params: { query } })
+    .then(res => {
+      progress.done()
+      return res
+    })
 }
 
 export function getUrls(id) {
-  return axios.get('http://localhost:7001/api/urls', { params: { id } })
+  progress.start()
+  return axios.get('/api/urls', { params: { id } })
+    .then(res => {
+      progress.done()
+      return res
+    })
 }
 
 export function push(url) {
-  return axios.get('http://localhost:7001/api/push', { params: { url } })
+  progress.start()
+  return axios.get('/api/push', { params: { url } })
+    .then(res => {
+      progress.done()
+      return res
+    })
 }

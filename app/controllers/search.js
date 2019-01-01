@@ -1,6 +1,7 @@
 const model = require('../models')
-const render = require('../services/render')
+const push = require('../services/push')
 const cache = require('../services/cache')
+const render = require('../services/render')
 
 module.exports = {
   async get(ctx) {
@@ -15,10 +16,20 @@ module.exports = {
     ctx.body = html
   },
   async search(ctx) {
-    ctx.body = await model.getList(ctx.query.query)
+    let data = cache.get(ctx.url)
+    if (!data) {
+      data = await model.getList(ctx.query.query)
+      cache.set(ctx.url, data)
+    }
+    ctx.body = data
   },
   async urls(ctx) {
-    ctx.body = await model.getUrls(ctx.query.id)
+    let data = cache.get(ctx.url)
+    if (!data) {
+      data = await model.getUrls(ctx.query.id)
+      cache.set(ctx.url, data)
+    }
+    ctx.body = data
   },
   async push(ctx) {
     ctx.body = await push(ctx.query.url)

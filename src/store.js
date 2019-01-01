@@ -11,7 +11,10 @@ export function createStore() {
     },
     actions: {
       getList({ commit }, query) {
-        return getList(query).then(res => commit('setList', res.data))
+        return getList(query).then(res => {
+          commit('setList', res.status === 200 ? res.data : [])
+          return res
+        })
       }
     },
     mutations: {

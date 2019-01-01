@@ -7,6 +7,7 @@
     "kpush": "./cli.js"
   },
   "scripts": {
+    "start": "cross-env APP_ENV=dev node app",
     "serve": "vue-cli-service serve",
     "build": "npm run build:server && npm run rename && npm run build:client && npm run rename:back && npm run remove",
     "build:client": "vue-cli-service build",
@@ -23,9 +24,9 @@
     "koa": "^2.6.2",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
-    "less": "^3.9.0",
-    "less-loader": "^4.1.0",
     "lru-cache": "^5.1.1",
+    "nodemailer": "^5.0.0",
+    "nprogress": "^0.2.0",
     "superagent": "^4.1.0",
     "vue": "^2.5.17",
     "vue-router": "^3.0.2",
@@ -41,6 +42,10 @@
     "cross-env": "^5.2.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
+    "koa2-cors": "^2.0.6",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "lodash.merge": "^4.6.1",
     "vue-template-compiler": "^2.5.17",
     "webpack-node-externals": "^1.7.2"
   },

@@ -1,4 +1,5 @@
 import { createApp } from './main'
+import progress from 'nprogress'
 
 const { app, router, store } = createApp()
 
@@ -8,6 +9,8 @@ if (window.__INITIAL_STATE__) {
 
 router.onReady(() => {
   router.beforeResolve((to, from, next) => {
+    progress.start()
+
     const matched = router.getMatchedComponents(to)
     const prevMatched = router.getMatchedComponents(from)
 
@@ -26,6 +29,8 @@ router.onReady(() => {
       }
     })).then(next).catch(next)
   })
+
+  router.afterEach(() => progress.done())
 
   app.$mount('#app')
 })

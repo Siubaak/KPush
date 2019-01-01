@@ -14,6 +14,9 @@ app.use(router)
 if (module.parent) {
   module.exports = app
 } else {
-  const config = require('../config')
-  app.listen(config.port, () => app.context.log.i(`KPush server is listening at ${config.port}`))
+  if (process.env.APP_ENV === 'dev') {
+    const cors = require('koa2-cors')
+    app.use(cors({ origin: 'http://localhost:8080' }))
+  }
+  app.listen(8081, () => app.context.log.w(`KPush server is listening at 8081`))
 }

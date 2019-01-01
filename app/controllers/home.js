@@ -1,5 +1,5 @@
-const render = require('../services/render')
 const cache = require('../services/cache')
+const render = require('../services/render')
 
 module.exports = {
   async get(ctx) {
