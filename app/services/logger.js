@@ -8,7 +8,8 @@ const COLOR = {
   DBG: '\x1b[35m',
   INF: '\x1b[37m',
   WRN: '\x1b[33m',
-  ERR: '\x1b[31m'
+  ERR: '\x1b[31m',
+  RST: '\x1b[0m'
 }
 
 class Logger {
@@ -18,7 +19,7 @@ class Logger {
   formatLog(type, msg) {
     if (this.level > LEVEL[type]) return
     const now = new Date()
-    console.log(`${now.toLocaleDateString()} ${now.toLocaleTimeString()} ${COLOR[type]}[${type}]\x1b[0m ${msg}`)
+    console.log(`${COLOR[type]}${now.toLocaleDateString()} ${now.toLocaleTimeString()} [${type}] ${msg}${COLOR.RST}`)
   }
   d(msg) { this.formatLog('DBG', msg) }
   i(msg) { this.formatLog('INF', msg) }
