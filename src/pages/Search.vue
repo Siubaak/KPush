@@ -8,7 +8,7 @@
     <div v-if="list.length" class="kp-search-result">
       <kp-card v-for="book in list" class="" :key="book.id" :img="book.img" :desc="book.desc" @push="handleFetchUrls(book.id)"/>
     </div>
-    <p v-else-if="fail" class="kp-search-tips">出错了，再搜一次吧...</p>
+    <p v-else-if="fail" class="kp-search-tips">出错了，重试一下吧...</p>
     <p v-else class="kp-search-tips">哎呀，没有相关图书哦...</p>
 
     <kp-dialog :visible="dialogVisible" :urls="urls" @submit="handlePush"
@@ -34,17 +34,19 @@ export default {
     'kp-dialog': Dialog,
     'kp-mask': Mask
   },
-  asyncData ({ store, route }) {
+  asyncData({ store, route }) {
     return store.dispatch('getList', route.query.query)
   },
   computed: {
+    fail() {
+      return this.$store.state.result.fail
+    },
     list() {
-      return this.$store.state.list
+      return this.$store.state.result.list
     }
   },
   data() {
     return {
-      fail: false,
       value: '',
       urls: [],
       dialogVisible: false
@@ -56,29 +58,21 @@ export default {
     },
     handleSearch() {
       if (this.value) {
-        this.fail = false
         this.$store.dispatch('getList', this.value)
-          .then(res => {
-            if (res.status !== 200) {
-              this.fail = true
-            }
-          })
       }
     },
     handleFetchUrls(id) {
       getUrls(id).then(res => {
-        this.urls = res.status === 200 ? res.data : []
+        this.urls = res.data
+        this.dialogVisible = true
+      }).catch(() => {
+        this.urls = []
         this.dialogVisible = true
       })
     },
     handlePush(url) {
-      push(url).then(res => {
-        if (res.status === 200) {
-          this.dialogVisible = false
-        } else {
-          this.urls = []
-        }
-      })
+      push(url).then(() => this.dialogVisible = false)
+        .catch(() => this.urls = [])
     }
   }
 }

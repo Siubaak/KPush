@@ -1,4 +1,4 @@
-const request = require('superagent')
+const axios = require('axios')
 const cheerio = require('cheerio')
 
 module.exports = {
@@ -14,8 +14,8 @@ module.exports = {
    * mobi.desc - mobi电子书描述（标题、简介等）
    */
   async getList(query) {
-    const res = await request.get('http://www.pdfbook.cn').query({ s: query })
-    const $ = cheerio.load(res.text)
+    const res = await axios.get('http://www.pdfbook.cn', { params: { s: query } })
+    const $ = cheerio.load(res.data)
     const $li = $('#main .image_box li')
     const $as = $li.find('strong a')
     const $imgs = $li.find('img')
@@ -32,12 +32,12 @@ module.exports = {
   /**
     * 获取mobi电子书下载链接
     * 
-    * @param {string} id - mobi电子书索引
+    * @param {string} id - mobi电子书索引或连接
     * @return {array} - 返回源中mobi电子书下载链接数组
     */
   async getUrls(id) {
-    const res = await request.get(id)
-    const $ = cheerio.load(res.text)
+    const res = await axios.get(id)
+    const $ = cheerio.load(res.data)
     const $links = $('#main .post a')
     const list = []
     const listMap = {}

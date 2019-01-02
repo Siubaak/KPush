@@ -1,7 +1,7 @@
 {
   "name": "kpush",
   "version": "2.0.0",
-  "description": "A push server for kindle based on www.zoudupai.com",
+  "description": "A push server for kindle based on www.pdfbook.cn",
   "main": "app/index.js",
   "bin": {
     "kpush": "./cli.js"
@@ -27,7 +27,6 @@
     "lru-cache": "^5.1.1",
     "nodemailer": "^5.0.0",
     "nprogress": "^0.2.0",
-    "superagent": "^4.1.0",
     "vue": "^2.5.17",
     "vue-router": "^3.0.2",
     "vue-server-renderer": "^2.5.21",

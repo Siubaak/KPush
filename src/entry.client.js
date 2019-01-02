@@ -1,5 +1,24 @@
-import { createApp } from './main'
+import axios from 'axios'
 import progress from 'nprogress'
+import { createApp } from './main'
+
+progress.configure({ showSpinner: false })
+
+axios.interceptors.request.use(config => {
+  progress.start()
+  return config
+}, error => {
+  progress.done()
+  return Promise.reject(error)
+})
+
+axios.interceptors.response.use(response => {
+  progress.done()
+  return response
+}, error => {
+  progress.done()
+  return Promise.reject(error)
+})
 
 const { app, router, store } = createApp()
 

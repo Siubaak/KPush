@@ -7,6 +7,7 @@ const package = require('../package')
 
 program.version(package.version)
   .option('-c, --config <string>', 'set kpush custom config')
+  .option('-h, --host <string>', 'set kpush server listening host')
   .option('-p, --port <number>', 'set kpush server listening port')
   .option('-s, --smtp <string>', 'set stmp server of pushing mail')
   .option('-u, --user <string>', 'set user of pushing mail')
@@ -22,6 +23,7 @@ if (program.config) {
     console.log("\n  error: can't load config at `%s'\n", program.config)
   }
 } else {
+  config.host = program.host || config.host
   config.port = program.port || config.port
   config.smtp = program.smtp || config.smtp
   config.user = program.user || config.user
@@ -32,4 +34,5 @@ fs.writeFileSync(path.join(__dirname, '../config.json'), JSON.stringify(config))
 
 const app = require('../app')
 
-app.listen(config.port, () => app.context.log.w(`KPush server is listening at ${config.port}`))
+app.listen(config.port, config.host,
+  () => app.context.log.i(`Server is listening at http://${config.host}:${config.port}`))

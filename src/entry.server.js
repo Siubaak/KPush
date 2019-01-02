@@ -1,4 +1,12 @@
+import axios from 'axios'
+import config from '../config'
 import { createApp } from './main'
+
+if (process.env.APP_ENV === 'dev') {
+  axios.defaults.baseURL = 'http://localhost:8081'
+} else {
+  axios.defaults.baseURL = `http://${config.host}:${config.port}`
+}
 
 export default ctx => {
   return new Promise((resolve, reject) => {

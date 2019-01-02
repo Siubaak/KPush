@@ -1,1 +1,8 @@
-{"port":"7001","smtp":"smtp.163.com","user":"test@163.com","pass":"test","kindle":"test@kindle.cn"}
+{
+  "host": "localhost",
+  "port": "8081",
+  "smtp": "smtp.163.com",
+  "user": "test@163.com",
+  "pass": "test",
+  "kindle": "test@kindle.cn"
+}

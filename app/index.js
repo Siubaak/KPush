@@ -18,5 +18,5 @@ if (module.parent) {
     const cors = require('koa2-cors')
     app.use(cors({ origin: 'http://localhost:8080' }))
   }
-  app.listen(8081, () => app.context.log.w(`KPush server is listening at 8081`))
+  app.listen(8081, () => app.context.log.w(`Dev server is listening at http://localhost:8081`))
 }

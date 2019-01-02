@@ -7,19 +7,17 @@ Vue.use(Vuex)
 export function createStore() {
   return new Vuex.Store({
     state: {
-      list: []
+      result: {}
     },
     actions: {
       getList({ commit }, query) {
-        return getList(query).then(res => {
-          commit('setList', res.status === 200 ? res.data : [])
-          return res
-        })
+        return getList(query).then(res => commit('setList', { fail: false, list: res.data }))
+          .catch(err => commit('setList', { fail: true, list: [] }))
       }
     },
     mutations: {
-      setList(state, list) {
-        state.list = list
+      setList(state, result) {
+        state.result = result
       }
     }
   })
