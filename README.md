@@ -6,13 +6,16 @@
 
 ## 安装
 
-首先需要安装Node.js环境，且版本大于8，[相关信息请戳这里](https://nodejs.org/en/download/current/)
-
-### npm源
+KPush需要安装版本8.0以上的Node环境，[相关信息请戳这里](https://nodejs.org/en/download/current/)
 
 ```bash
-# 全局安装
 $ npm i -g kpush
+```
+
+当然，也可以直接通过npx安装使用，具体配置看下面使用帮助
+
+```bash
+$ npx kpush -h localhost -p 8081
 ```
 
 ## 使用
@@ -47,7 +50,7 @@ $ kpush
 
 ```bash
 # 可以只设置其中几项
-$ kpush -h localhost -p 7001 -s smtp.163.com -u test@163.com -w test -k test@kindle.cn
+$ kpush -h localhost -p 8081 -s smtp.163.com -u test@163.com -w test -k test@kindle.cn
 ```
 
 以自定义配置运行：
@@ -62,7 +65,7 @@ $ kpush -c /usr/local/kpush/config.json
 ```js
 {
   "host": "localhost",
-  "port": "7001",
+  "port": "8081",
   "smtp": "smtp.163.com",
   "user": "test@163.com",
   "pass": "test",
@@ -74,4 +77,4 @@ $ kpush -c /usr/local/kpush/config.json
 
 ## mobi源更换
 
-这里默认用了[云海电子图书馆](http://www.pdfbook.cn/)作为mobi电子书源，感谢一下。若更换其他mobi源，请自行fork以后对`app/models/index.js`中getList和getUrl方法进行重新实现，约定见注释。
+这里默认用了[云海电子图书馆](http://www.pdfbook.cn/)作为mobi电子书源，感谢一下。若更换其他mobi源，请自行fork以后对`app/models/index.js`中getList和getUrl方法进行重新实现，约定见注释
