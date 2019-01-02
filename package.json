@@ -1,10 +1,10 @@
 {
   "name": "kpush",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "A push server for kindle based on www.pdfbook.cn",
   "main": "app/index.js",
   "bin": {
-    "kpush": "./cli.js"
+    "kpush": "bin/index.js"
   },
   "scripts": {
     "start": "cross-env APP_ENV=dev node app",
@@ -18,35 +18,51 @@
     "lint": "vue-cli-service lint",
     "pub": "npm run lint && npm run build && npm publish"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Siubaak/KPush.git"
+  },
+  "keywords": [
+    "kindle",
+    "push",
+    "mobi"
+  ],
+  "author": "Siubaak",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Siubaak/KPush/issues"
+  },
+  "homepage": "https://github.com/Siubaak/KPush#README",
   "dependencies": {
     "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.2",
     "commander": "^2.19.0",
+    "core-js": "^2.6.1",
     "koa": "^2.6.2",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "lru-cache": "^5.1.1",
     "nodemailer": "^5.0.0",
     "nprogress": "^0.2.0",
-    "vue": "^2.5.17",
+    "vue": "^2.5.21",
     "vue-router": "^3.0.2",
     "vue-server-renderer": "^2.5.21",
     "vuex": "^3.0.1",
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.4",
-    "@vue/cli-plugin-eslint": "^3.0.4",
-    "@vue/cli-service": "^3.0.4",
+    "@vue/cli-plugin-babel": "^3.2.2",
+    "@vue/cli-plugin-eslint": "^3.2.2",
+    "@vue/cli-service": "^3.2.2",
     "babel-eslint": "^10.0.1",
     "cross-env": "^5.2.0",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0-0",
+    "eslint": "^5.11.1",
+    "eslint-plugin-vue": "^5.0.0",
     "koa2-cors": "^2.0.6",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
     "lodash.merge": "^4.6.1",
-    "vue-template-compiler": "^2.5.17",
+    "vue-template-compiler": "^2.5.21",
     "webpack-node-externals": "^1.7.2"
   },
   "eslintConfig": {
