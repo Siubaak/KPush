@@ -6,9 +6,9 @@ module.exports = {
    * 获取mobi电子书搜索列表
    * 
    * @param {string} query - 查询关键词
-   * @return {array} - 返回list数组
+   * @return {array} - 返回电子书列表
    * 
-   * list数组元素为mobi对象，包含3个字段，均为string
+   * 返回数组元素为mobi对象，包含3个字段，均为string
    * mobi.id - mobi电子书唯一索引，用于查询源下载用url
    * mobi.img - mobi电子书封面图url
    * mobi.desc - mobi电子书描述（标题、简介等）
@@ -32,8 +32,12 @@ module.exports = {
   /**
     * 获取mobi电子书下载链接
     * 
-    * @param {string} id - mobi电子书索引或连接
-    * @return {array} - 返回源中mobi电子书下载链接数组
+    * @param {string} id - mobi电子书索引或链接
+    * @return {array} - 返回电子书下载列表
+    * 
+    * 返回数组元素为download对象，包含2个字段，均为string
+    * download.url - mobi电子书下载链接
+    * download.desc - mobi电子书标题
     */
   async getUrls(id) {
     const res = await axios.get(id)
