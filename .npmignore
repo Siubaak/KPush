@@ -1,7 +1,11 @@
 .DS_Store
 node_modules
 /tmp-bundle
-/dist
+/src
+
+# Dev config files
+/babel.config.js
+/vue.config.js
 
 # Local env files
 .env.local

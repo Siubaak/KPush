@@ -31,7 +31,7 @@ export default {
     }
   },
   watch: {
-    visible(newVal) {
+    visible() {
       this.bottom = '-' + getComputedStyle(this.$el).height
     }
   },

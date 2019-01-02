@@ -12,7 +12,7 @@ export function createStore() {
     actions: {
       getList({ commit }, query) {
         return getList(query).then(res => commit('setList', { fail: false, list: res.data }))
-          .catch(err => commit('setList', { fail: true, list: [] }))
+          .catch(() => commit('setList', { fail: true, list: [] }))
       }
     },
     mutations: {

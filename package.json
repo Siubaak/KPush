@@ -15,7 +15,8 @@
     "rename": "mv dist/vue-ssr-server-bundle.json tmp-bundle",
     "rename:back": "mv tmp-bundle dist/vue-ssr-server-bundle.json",
     "remove": "rm dist/index.html",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "pub": "npm run lint && npm run build && npm publish"
   },
   "dependencies": {
     "axios": "^0.18.0",
