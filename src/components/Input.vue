@@ -1,6 +1,7 @@
 <template>
   <div class="kp-input">
-    <input v-model="internalVal" :placeholder="placeholder" @input="handleInput"/>
+    <input v-model="internalVal" :placeholder="placeholder"
+      @input="$emit('input', internalVal)" @keyup.enter="$emit('enter')"/>
   </div>
 </template>
 
@@ -18,12 +19,7 @@ export default {
   },
   data() {
     return {
-      internalVal: ''
-    }
-  },
-  methods: {
-    handleInput() {
-      this.$emit('input', this.internalVal)
+      internalVal: this.value
     }
   }
 }

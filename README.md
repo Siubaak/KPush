@@ -40,23 +40,17 @@ Options:
 
 所有设置都会自动保存，再次使用时无需再进行设置
 
-运行：
-
-```bash
-$ kpush
-```
-
-配置设置并运行:
+配置设置并启动:
 
 ```bash
 # 可以只设置其中几项
 $ kpush -h localhost -p 8081 -s smtp.163.com -u test@163.com -w test -k test@kindle.cn
 ```
 
-以自定义配置运行：
+以自定义配置启动：
 
 ```bash
-# 请提供配置的绝对路径，以自定义配置运行时将忽略其他设置选项
+# 请提供配置的绝对路径，以自定义配置启动时将忽略其他设置选项
 $ kpush -c /usr/local/kpush/config.json
 ```
 
@@ -73,7 +67,7 @@ $ kpush -c /usr/local/kpush/config.json
 }
 ```
 
-运行后，浏览器访问KPush服务器监听端口即可使用，推荐移动端进行访问
+启动后，浏览器访问KPush服务器监听端口即可使用，推荐移动端进行访问
 
 ## mobi源更换
 

@@ -1,7 +1,8 @@
 <template>
   <div class="kp-search-container">
     <div class="kp-search-nav">
-      <kp-input class="kp-search-input" v-model="value" placeholder="请输入关键词..."/>
+      <kp-input class="kp-search-input" v-model="value" placeholder="请输入关键词..."
+        @enter="handleSearch"/>
       <kp-button class="kp-search-button" @click="handleSearch">搜索</kp-button>
     </div>
 

@@ -1,7 +1,8 @@
 <template>
   <div class="kp-home-container">
     <h2 class="kp-home-title">KPush服务</h2>
-    <kp-input class="kp-home-input" v-model="value" placeholder="请输入关键词..."/>
+    <kp-input class="kp-home-input" v-model="value" placeholder="请输入关键词..."
+      @enter="handleSearch"/>
     <kp-button class="kp-home-button" @click="handleSearch">搜索</kp-button>
   </div>
 </template>
