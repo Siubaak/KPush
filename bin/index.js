@@ -7,7 +7,7 @@ const package = require('../package')
 
 program.version(package.version)
   .option('-c, --config <string>', 'set kpush custom config')
-  .option('-h, --host <string>', 'set kpush server listening host')
+  .option('-o, --host <string>', 'set kpush server listening host')
   .option('-p, --port <number>', 'set kpush server listening port')
   .option('-s, --smtp <string>', 'set stmp server of pushing mail')
   .option('-u, --user <string>', 'set user of pushing mail')

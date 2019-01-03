@@ -1,6 +1,6 @@
 {
   "name": "kpush",
-  "version": "2.0.3",
+  "version": "2.0.5",
   "description": "A push server for kindle based on www.pdfbook.cn",
   "main": "app/index.js",
   "bin": {
