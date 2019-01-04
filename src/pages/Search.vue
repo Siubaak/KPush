@@ -1,19 +1,19 @@
 <template>
   <div class="kp-search-container">
     <div class="kp-search-nav">
-      <kp-input class="kp-search-input" v-model="value" placeholder="请输入关键词..."
-        @enter="handleSearch"/>
+      <kp-input class="kp-search-input" v-model="value"
+        placeholder="请输入关键词..." @enter="handleSearch"/>
       <kp-button class="kp-search-button" @click="handleSearch">搜索</kp-button>
     </div>
 
     <div v-if="list.length" class="kp-search-result">
-      <kp-card v-for="book in list" class="" :key="book.id" :img="book.img" :desc="book.desc" @push="handleFetchUrls(book.id)"/>
+      <kp-card v-for="(book, idx) in list" :key="idx"
+        :desc="book.desc" @push="handlePush(book.url)"/>
     </div>
     <p v-else-if="fail" class="kp-search-tips">出错了，重试一下吧...</p>
     <p v-else class="kp-search-tips">哎呀，没有相关图书哦...</p>
 
-    <kp-dialog :visible="dialogVisible" :urls="urls" @submit="handlePush"
-      @hide="handleDialogHide"></kp-dialog>
+    <kp-dialog :visible="dialogVisible" :status="dialogStatus"></kp-dialog>
     <kp-mask :visible="dialogVisible" @click="handleDialogHide"></kp-mask>
   </div>
 </template>
@@ -25,7 +25,7 @@ import Card from '../components/Card'
 import Dialog from '../components/Dialog'
 import Mask from '../components/Mask'
 
-import { getUrls, push } from '../api'
+import { push } from '../api'
 
 export default {
   components: {
@@ -40,40 +40,43 @@ export default {
   },
   computed: {
     fail() {
-      return this.$store.state.result.fail
+      if (typeof this.$store.state.result.fail === 'boolean') {
+        return this.$store.state.result.fail
+      } else {
+        return true
+      }
     },
     list() {
-      return this.$store.state.result.list
+      if (Array.isArray(this.$store.state.result.list)) {
+        return this.$store.state.result.list
+      } else {
+        return []
+      }
     }
   },
   data() {
     return {
       value: '',
-      urls: [],
+      dialogStatus: 'ok',
       dialogVisible: false
     }
   },
   methods: {
     handleDialogHide() {
-      this.dialogVisible = false
+      if (this.dialogStatus !== 'loading') {
+        this.dialogVisible = false
+      }
     },
     handleSearch() {
       if (this.value) {
         this.$store.dispatch('getList', this.value)
       }
     },
-    handleFetchUrls(id) {
-      getUrls(id).then(res => {
-        this.urls = res.data
-        this.dialogVisible = true
-      }).catch(() => {
-        this.urls = []
-        this.dialogVisible = true
-      })
-    },
     handlePush(url) {
-      push(url).then(() => this.dialogVisible = false)
-        .catch(() => this.urls = [])
+      this.dialogVisible = true
+      this.dialogStatus = 'loading'
+      push(url).then(() => this.dialogStatus = 'ok')
+        .catch(() => this.dialogStatus = 'fail')
     }
   }
 }

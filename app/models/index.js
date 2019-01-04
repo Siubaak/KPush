@@ -8,49 +8,27 @@ module.exports = {
    * @param {string} query - 查询关键词
    * @return {array} - 返回电子书列表
    * 
-   * 返回数组元素为mobi对象，包含3个字段，均为string
-   * mobi.id - mobi电子书唯一索引，用于查询源下载用url
-   * mobi.img - mobi电子书封面图url
+   * 返回数组元素为mobi对象，包含2个字段，均为string
+   * mobi.url - mobi电子书下载用url
    * mobi.desc - mobi电子书描述（标题、简介等）
    */
   async getList(query) {
-    const res = await axios.get('http://www.pdfbook.cn', { params: { s: query } })
-    const $ = cheerio.load(res.data)
-    const $li = $('#main .image_box li')
-    const $as = $li.find('strong a')
-    const $imgs = $li.find('img')
-    const list = []
-    for(let i = 0; i < $li.length; i++) {
-      list.push({
-        id: $as.eq(i).attr('href'),
-        img: $imgs.eq(i).attr('src'),
-        desc: $as.eq(i).attr('title')
-      })
-    }
-    return list
-  },
-  /**
-    * 获取mobi电子书下载链接
-    * 
-    * @param {string} id - mobi电子书索引或链接
-    * @return {array} - 返回电子书下载列表
-    * 
-    * 返回数组元素为download对象，包含2个字段，均为string
-    * download.url - mobi电子书下载链接
-    * download.desc - mobi电子书标题
-    */
-  async getUrls(id) {
-    const res = await axios.get(id)
-    const $ = cheerio.load(res.data)
-    const $links = $('#main .post a')
-    const list = []
-    const listMap = {}
-    for(let i = 0; i < $links.length; i++) {
-      const url = $links.eq(i).attr('href')
-      if (!listMap[url]) {
-        list.push({ url, desc: $links.eq(i).text() })
-        listMap[url] = true
+    const res = await axios.get('https://sk.kindleshare.cn', {
+      params: {
+        ext: 'mobi',
+        name: query,
+        submit: 'Search'
       }
+    })
+    const $ = cheerio.load(res.data)
+    const $li = $('#jieguo table tr')
+    const list = []
+    for(let i = 1; i < $li.length; i++) {
+      const $td = $li.eq(i).find('td')
+      list.push({
+        url: $td.eq(3).find('a').attr('href'),
+        desc: `${$td.eq(0).text()} (${$td.eq(2).text()})`
+      })
     }
     return list
   }

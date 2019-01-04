@@ -1,4 +1,4 @@
-const config = require('../..//config')
+const config = require('../../config')
 const nodemailer = require('nodemailer')
 
 const transporter = nodemailer.createTransport({
@@ -11,18 +11,14 @@ const transporter = nodemailer.createTransport({
   }
 })
 
-module.exports = path => {
-  return new Promise((resolve, reject) => {
-    transporter.sendMail({
-      from: 'noreply  <' + config.user + '>',
-      to: config.kindle,
-      subject: 'Convert',
-      text: 'Pushing to kindle from ' + path,
-      attachments: [{ 
-        path,
-        encoding: 'base64',
-        contentType: 'application/x-mobipocket-ebook'
-      }]
-    }, err => err ? reject(err) : resolve())
-  })
-}
+module.exports = path => transporter.sendMail({
+  from: `noreply  < ${config.user} >`,
+  to: config.kindle,
+  subject: 'Convert',
+  text: `Pushing to kindle from ${path}`,
+  attachments: [{
+    path: encodeURI(path),
+    encoding: 'base64',
+    contentType: 'application/x-mobipocket-ebook'
+  }]
+})

@@ -23,15 +23,7 @@ module.exports = {
     }
     ctx.body = data
   },
-  async urls(ctx) {
-    let data = cache.get(ctx.url)
-    if (!data) {
-      data = await model.getUrls(ctx.query.id)
-      cache.set(ctx.url, data)
-    }
-    ctx.body = data
-  },
   async push(ctx) {
-    ctx.body = await push(ctx.query.url)
+    ctx.body = await push(ctx.request.body.url)
   }
 }

@@ -2,6 +2,7 @@ const Koa = require('koa')
 const path = require('path')
 const router = require('./router')
 const static = require('koa-static')
+const parser = require('koa-bodyparser')
 const Logger = require('./services/logger')
 
 const app = new Koa()
@@ -9,6 +10,7 @@ const app = new Koa()
 app.context.log = new Logger()
 
 app.use(static(path.resolve(__dirname, '../dist')))
+app.use(parser())
 app.use(router)
 
 if (module.parent) {

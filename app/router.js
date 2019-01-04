@@ -11,7 +11,6 @@ router.get('/', homeCrtller.get)
 router.get('/search', searchCrtller.get)
 
 router.get('/api/search', searchCrtller.search)
-router.get('/api/urls', searchCrtller.urls)
-router.get('/api/push', searchCrtller.push)
+router.post('/api/push', searchCrtller.push)
 
 module.exports = router.routes()

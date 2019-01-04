@@ -1,10 +1,7 @@
 <template>
   <div class="kp-card">
-    <img class="kp-card-img" :src="img" />
-    <div class="kp-card-opr">
-      <p class="kp-card-desc">{{desc}}</p>
-      <kp-button class="kp-card-button" @click="$emit('push')">推送</kp-button>
-    </div>
+    <p class="kp-card-desc">{{desc}}</p>
+    <kp-button class="kp-card-button" @click="$emit('push')">推送</kp-button>
   </div>
 </template>
 
@@ -13,10 +10,6 @@ import Button from './Button'
 
 export default {
   props: {
-    img: {
-      type: String,
-      default: ''
-    },
     desc: {
       type: String,
       default: ''
@@ -38,22 +31,17 @@ export default {
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  .kp-card-img {
-    width: 80px;
+  padding: 12px;
+  .kp-card-desc {
+    margin: 0;
+    flex: 1;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
-  .kp-card-opr {
-    width: 100%;
-    padding: 12px;
-    display: flex;
-    align-items: center;
-    .kp-card-desc {
-      margin: 0;
-      flex: 1;
-      text-align: left;
-    }
-    .kp-card-button {
-      margin-left: 8px;
-    }
+  .kp-card-button {
+    margin-left: 8px;
   }
 }
 .kp-card + .kp-card {

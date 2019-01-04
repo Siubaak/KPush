@@ -71,4 +71,4 @@ $ kpush -c /usr/local/kpush/config.json
 
 ## mobi源更换
 
-这里默认用了[云海电子图书馆](http://www.pdfbook.cn/)作为mobi电子书源，感谢一下。若更换其他mobi源，请自行fork以后对`app/models/index.js`中getList和getUrl方法进行重新实现，约定见注释
+这里默认用了[KindleShare电子书搜索引擎](https://sk.kindleshare.cn)作为mobi电子书源，感谢一下。若更换其他mobi源，请自行fork以后重写`app/models/index.js`中getList方法，约定见注释
