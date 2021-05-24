@@ -8,7 +8,7 @@
 
     <div v-if="list.length" class="kp-search-result">
       <kp-card v-for="(book, idx) in list" :key="idx"
-        :desc="book.desc" @push="handlePush(book.url)"/>
+        :desc="book.desc" @push="handlePush(book.id)"/>
     </div>
     <p v-else-if="fail" class="kp-search-tips">出错了，重试一下吧...</p>
     <p v-else class="kp-search-tips">哎呀，没有相关图书哦...</p>
@@ -72,10 +72,10 @@ export default {
         this.$store.dispatch('getList', this.value)
       }
     },
-    handlePush(url) {
+    handlePush(id) {
       this.dialogVisible = true
       this.dialogStatus = 'loading'
-      push(url).then(() => this.dialogStatus = 'ok')
+      push(id).then(() => this.dialogStatus = 'ok')
         .catch(() => this.dialogStatus = 'fail')
     }
   }

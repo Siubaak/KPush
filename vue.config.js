@@ -12,6 +12,9 @@ const serverConfig = {
   output: {
     libraryTarget: 'commonjs2'
   },
+  optimization: {
+    splitChunks: false
+  },
   externals: nodeExternals({
     whitelist: /\.css$/
   }),

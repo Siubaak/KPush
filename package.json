@@ -1,7 +1,7 @@
 {
   "name": "kpush",
-  "version": "2.1.3",
-  "description": "A push server for kindle based on sk.kindleshare.cn",
+  "version": "2.2.0",
+  "description": "A push server for kindle based on 3lib.net",
   "main": "app/index.js",
   "bin": {
     "kpush": "bin/index.js"
@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/Siubaak/KPush#README",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.2",
     "commander": "^2.19.0",
     "core-js": "^2.6.1",
@@ -43,7 +43,7 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "lru-cache": "^5.1.1",
-    "nodemailer": "^5.0.0",
+    "nodemailer": "^6.6.1",
     "nprogress": "^0.2.0",
     "vue": "^2.5.21",
     "vue-router": "^3.0.2",
