@@ -8,7 +8,7 @@
 
     <div v-if="list.length" class="kp-search-result">
       <kp-card v-for="(book, idx) in list" :key="idx"
-        :desc="book.desc" @push="handlePush(book.id)"/>
+        :desc="book.desc" :cover="book.cover" @push="handlePush(book.id)"/>
     </div>
     <p v-else-if="fail" class="kp-search-tips">出错了，重试一下吧...</p>
     <p v-else class="kp-search-tips">哎呀，没有相关图书哦...</p>
