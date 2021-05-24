@@ -15,7 +15,7 @@ $ npm i -g kpush
 当然，也可以直接通过npx安装使用，具体配置看下面使用帮助
 
 ```bash
-$ npx kpush -h localhost -p 8081
+$ npx kpush -o localhost -p 8081
 ```
 
 ## 使用
@@ -26,10 +26,9 @@ $ npx kpush -h localhost -p 8081
 Usage: kpush [options]
 
 Options:
-
   -V, --version          output the version number
   -c, --config <string>  set kpush custom config
-  -h, --host <string>    set kpush server listening host
+  -o, --host <string>    set kpush server listening host
   -p, --port <number>    set kpush server listening port
   -s, --smtp <string>    set stmp server of pushing mail
   -u, --user <string>    set user of pushing mail
@@ -44,7 +43,7 @@ Options:
 
 ```bash
 # 可以只设置其中几项
-$ kpush -h localhost -p 8081 -s smtp.163.com -u test@163.com -w test -k test@kindle.cn
+$ kpush -o localhost -p 8081 -s smtp.163.com -u test@163.com -w test -k test@kindle.cn
 ```
 
 以自定义配置启动：
